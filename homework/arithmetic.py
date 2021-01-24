@@ -1,5 +1,7 @@
 a = 2
 b = 0
-while b < 100:
+c = int(input("What number do i add up to? "))
+while a < c + 1:
   b = a + b
-  print(b)
+  a = a + 2
+print(b)
