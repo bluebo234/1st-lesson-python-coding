@@ -1,9 +1,9 @@
 b = 2
+a = 1
 c = 0
 print(a)
-print(b)
-while c < 100:
+while b < 100:
  c = a + b
- print(c)
+ print(b)
  a = b
  b = c
