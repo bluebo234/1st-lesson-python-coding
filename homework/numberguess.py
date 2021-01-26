@@ -10,4 +10,3 @@ while guess != rn:
     print("Congratulations! The number was", rn,)
   guess = int(input("Guess another number. "))
 print("Congratulations! The number was", rn,"!")
-print("press enter to exit")
