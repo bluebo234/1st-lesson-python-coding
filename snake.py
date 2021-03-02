@@ -1,14 +1,15 @@
 import curses
 from curses import textpad
+import random
 
 def board(stdscr):
 
   # turn off the cursor1
   curses.curs_set(0)
   # turn on nodelay to make the snake moving by itself.
-  stdscr.nodelay(0)
+  stdscr.nodelay(1)
   # set the timeout to 0.1 second
-  stdscr.timeout(100)
+  stdscr.timeout(150)
 
   sh, sw = stdscr.getmaxyx()
 
@@ -20,6 +21,13 @@ def board(stdscr):
   # draw the game board.
   textpad.rectangle(stdscr, box[0][0], box[0][1], box[1][0], box[1][1])
 
+  food = [
+    # the y axis
+    random.randint(box[0][0] + 1, box[1][0] - 1),
+    # the x axis
+    random.randint(box[0][1] + 1, box[1][1] - 1)
+    ]
+  stdscr.addstr(food[0], food[1], "*")
   # define the snake body.
   snake = [
     # head is always be the first item.
@@ -28,7 +36,7 @@ def board(stdscr):
     [sh // 2, sw // 2],
     # tail
     [sh // 2, sw // 2 - 1]
-  ]
+    ]
   snake_ch = chr(9608)
 
   # draw the snake body.
@@ -69,12 +77,29 @@ def board(stdscr):
     stdscr.addstr(new_head[0], new_head[1], snake_ch)
     # add new head to snake
     snake.insert(0, new_head)
-    # step 3, erase the tail from game board.
-    stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
-    # remove the tail cell from snake.
-    snake.pop()
-    
-    snake[0][0]
-    snake[0][1]
+    if new_head != food:
+      # step 3, erase the tail from game board.
+      stdscr.addstr(snake[-1][0], snake[-1][1], ' ')
+      # remove the tail cell from snake.
+      snake.pop()
+    else:
+      food = [
+      # the y axis
+      random.randint(box[0][0] + 1, box[1][0] - 1),
+      # the x axis
+        random.randint(box[0][1] + 1, box[1][1] - 1)
+      ]
+      stdscr.addstr(food[0], food[1], "*")
 
+    if new_head[0] == box [0][0]:
+      break;
+    if new_head[0] == box [1][0]:
+      break;
+    if new_head[1] == box [0][1]:
+      break;
+    if new_head[1] == box [1][1]:
+      break;
+  stdscr.addstr(sh // 2, sw // 2, "GAME OVER")
+  stdscr.nodelay(0)
+  stdscr.getch()
 curses.wrapper(board)
