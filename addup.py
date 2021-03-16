@@ -1,22 +1,16 @@
-def addup(total, index, max):
-
-  total = total + index
-  index = index + 1
-  if index > max:
-    return total
+def addup(num):
+  if num == 2:
+    return 2
   else:
-    return addup(total, index, max)
+    return num + addup(num - 2)
 
-print (addup(0, 1, 10))
+print(addup(10))
 
-def factorial(total, times):
 
-  total * (total - 1)
-  total = (total - 1)
-  times = (times - 1)
-  if times < 1:
-    return total
+def factorial(number, times):
+  if number == 1:
+    return 1
   else:
-    return factorial(total, times)
+    return number * factorial(number - 1, times - 1)
 
-print(factorial(5, 5))
+print(factorial(4, 4))
